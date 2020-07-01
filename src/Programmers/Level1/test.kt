@@ -16,6 +16,5 @@ fun main(){
     }
     alist.toString().toLong()
 
-    print(3>4 ?"0":"1")
-    string.toArr
+
 }

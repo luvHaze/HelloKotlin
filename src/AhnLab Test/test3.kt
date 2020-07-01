@@ -1,4 +1,3 @@
-import com.sun.prism.shader.Solid_TextureSecondPassLCD_AlphaTest_Loader
 
 fun main(){
 
