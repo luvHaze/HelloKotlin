@@ -12,12 +12,6 @@ fun main() {
     var br = BufferedReader(InputStreamReader(System.`in`))
     var cases = br.readLine().toInt()
 
-    for(i in 0 until cases) {
-
-    }
-
-
-
 
 
 }
