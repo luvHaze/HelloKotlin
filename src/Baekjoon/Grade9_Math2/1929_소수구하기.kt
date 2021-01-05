@@ -6,26 +6,16 @@ import java.util.*
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
-    val arrCase = ArrayList<Int>()
-    while(true) {
-        val num = br.readLine().toInt()
-        if(num != 0) {
-            arrCase.add(num)
-        } else {
-            break
-        }
+    val token = StringTokenizer(br.readLine())
+    val MIN = token.nextToken().toInt()
+    val MAX = token.nextToken().toInt()
+
+    val arrPrime = getPrimeList(MAX + 1)
+    val result = arrPrime.filter { it >= MIN }
+
+    result.forEach {
+        println(it)
     }
-
-    arrCase.forEach {
-        val MIN = it
-        val MAX = it * 2
-
-        val arrPrime = getPrimeList(MAX + 1)
-        val result = arrPrime.filter { prime -> prime > MIN }.size
-
-        println(result)
-    }
-
 }
 
 private fun getPrimeList(MAX: Int): ArrayList<Int> {
