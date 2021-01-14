@@ -5,24 +5,25 @@ import java.io.InputStreamReader
 import java.lang.StringBuilder
 import java.util.*
 
+private var sb = StringBuilder()
 private lateinit var arr: IntArray
-private lateinit var visit: BooleanArray
-private val sb = StringBuilder()
+private var N: Int = 0
+private var M: Int = 0
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
     var token = StringTokenizer(br.readLine())
 
-    var N = token.nextToken().toInt()
-    var M = token.nextToken().toInt()
+    N = token.nextToken().toInt()
+    M = token.nextToken().toInt()
 
     arr = IntArray(M)
-    visit = BooleanArray(N)
-    dfs(N, M, 0)
-    System.out.println(sb)
+
+    dfs(1, 0)
+    println(sb)
 }
 
-private fun dfs(N: Int, M: Int, depth: Int) {
+private fun dfs(at: Int, depth: Int) {
 
     if (depth == M) {
         arr.forEach {
@@ -32,12 +33,9 @@ private fun dfs(N: Int, M: Int, depth: Int) {
         return
     }
 
-    for (i in 0 until N) {
-        if (!visit[i]) {
-            visit[i] = true
-            arr[depth] = i + 1
-            dfs(N, M, depth + 1)
-            visit[i] = false
-        }
+    for (i in at..N) {
+        arr[depth] = i
+        println("[Depth] : $depth, [i] : $i [Array] : ${arr[0]} ${arr[1]}")
+        dfs(i + 1, depth + 1)
     }
 }

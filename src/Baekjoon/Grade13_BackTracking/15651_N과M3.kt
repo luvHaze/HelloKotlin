@@ -32,12 +32,8 @@ private fun dfs(N: Int, M: Int, depth: Int) {
         return
     }
 
-    for (i in 0 until N) {
-        if (!visit[i]) {
-            visit[i] = true
-            arr[depth] = i + 1
-            dfs(N, M, depth + 1)
-            visit[i] = false
-        }
+    for (i in 1..N) {
+        arr[depth] = i
+        dfs(N, M, depth+1)
     }
 }
