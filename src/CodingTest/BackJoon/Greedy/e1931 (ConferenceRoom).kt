@@ -1,28 +1,34 @@
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.util.*
 
 fun main() {
-    val sc = Scanner(System.`in`)
-    val conferenceNum = sc.nextInt()
-    var conferenceTime = arrayListOf<Pair<Int,Int>>()
-    var answer = 0
+    val br = BufferedReader(InputStreamReader(System.`in`))
 
-    for (i in 1..conferenceNum) {
-        conferenceTime.add(Pair(sc.nextInt(),sc.nextInt()))
+    val conferenceNum = br.readLine().toInt()
+    val conferences = mutableListOf<Conference>()
+
+    repeat(conferenceNum) {
+        val token = StringTokenizer(br.readLine())
+        val start = token.nextToken().toInt()
+        val end = token.nextToken().toInt()
+        conferences.add(Conference(start, end))
     }
 
-    var sorted = conferenceTime.sortedBy { it.second }
-    sorted.forEach {
-        var count = 1
-        var nextStep = it.second
+    conferences.sortWith(compareBy(Conference::start))
+    conferences.sortWith(compareBy(Conference::end))
 
-        for(i in sorted.indices){
-            if(nextStep<=sorted[i].first){
-                count++
-                nextStep=sorted[i].second
-            }
+    var endTime = 0
+    var answer = 0
+    conferences.forEach {
+        if (it.start >= endTime) {
+            answer++
+            endTime = it.end
         }
-        if(answer<=count) answer=count
     }
 
     print(answer)
 }
+
+data class Conference(val start: Int, val end: Int)
+
