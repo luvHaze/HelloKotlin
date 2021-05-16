@@ -37,20 +37,32 @@ fun calcString(string: String): Int {
                 }
             }
             ']' -> {
-                bBracketCount--
-                stack.pop()
-                multipleNumber /= 3
+                if(checkValidation(stack, rBracketCount, bBracketCount)) {
+                    bBracketCount--
+                    stack.pop()
+                    multipleNumber /= 3
+                } else {
+                    return 0
+                }
             }
             ')' -> {
-                rBracketCount--
-                stack.pop()
-                multipleNumber /= 2
+                if(checkValidation(stack, rBracketCount, bBracketCount)) {
+                    rBracketCount--
+                    stack.pop()
+                    multipleNumber /= 2
+                } else {
+                    return 0
+                }
             }
         }
     }
-    if (stack.isEmpty() || rBracketCount != 0 || bBracketCount != 0) {
+    if(stack.isNotEmpty() || rBracketCount !=0 || bBracketCount !=0) {
         return 0
     }
 
     return sum
+}
+
+fun checkValidation(stack: Stack<Char>, rCount: Int, bCount:Int): Boolean {
+    return stack.isNotEmpty() && rCount >= 0 && bCount >= 0
 }
