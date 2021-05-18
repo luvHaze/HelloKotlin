@@ -40,7 +40,7 @@ fun main() {
     println(maxSize)
 }
 
-fun bfs(x: Int, y: Int) {
+private fun bfs(x: Int, y: Int) {
     queue = LinkedList<Node>()
     queue.add(Node(x, y))
     var count = 0
