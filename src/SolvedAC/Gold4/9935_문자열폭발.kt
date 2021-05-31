@@ -9,16 +9,33 @@ fun main() {
     val string = br.readLine()
     val removeString = br.readLine()
 
-    val sb= StringBuilder()
+    var removeIdx = removeString.lastIndex
+    val stack = Stack<Char>()
     string.forEach { char ->
-        if(!removeString.contains(char)) {
-            sb.append(char)
+        stack.push(char)
+
+        if (stack.peek() == removeString[removeIdx]) {
+            if(stack.size >= removeString.length) {
+                var isBoom = true
+                repeat(removeString.length) {
+                    if(stack[stack.lastIndex - it] != removeString[removeIdx - it]) {
+                        isBoom = false
+                    }
+                }
+
+                if(isBoom) {
+                    repeat(removeString.length) {
+                        stack.pop()
+                    }
+                }
+            }
         }
     }
 
-    if(sb.isEmpty()) {
+    val boomString = stack.joinToString("")
+    if (boomString.isBlank()) {
         print("FRULA")
     } else {
-        print(sb)
+        print(boomString)
     }
 }
