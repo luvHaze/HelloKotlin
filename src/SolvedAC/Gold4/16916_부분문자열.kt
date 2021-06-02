@@ -24,7 +24,6 @@ private fun getLpsTable(string: String): IntArray {
             table[i] = ++j
         }
     }
-
     return table
 }
 
