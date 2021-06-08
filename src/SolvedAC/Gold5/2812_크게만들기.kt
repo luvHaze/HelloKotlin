@@ -7,29 +7,30 @@ import java.util.*
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
     val tk = StringTokenizer(br.readLine())
+    val n = tk.nextToken().toInt()
+    var k = tk.nextToken().toInt()
 
-    val N = tk.nextToken().toInt()
-    val K = tk.nextToken().toInt()
+    val stack = Stack<Int>()
+    val numbers = br.readLine().map {
+        it.toString().toInt()
+    }
 
-    val number = br.readLine()
-
-    var count = 0
-    val stack = Stack<Char>()
-    stack.push(number[0])
-    for (idx in 1 until number.length) {
-        if (stack.peek().convertInt() <= number[idx].convertInt()) {
-            if (count < K) {
+    for (element in numbers) {
+        while (stack.isNotEmpty() && k != 0) {
+            if (stack.peek() < element) {
                 stack.pop()
-                count ++
+                k--
+            } else {
+                break
             }
         }
+        stack.push(element)
+    }
 
-        stack.push(number[idx])
+    repeat(k) {
+        stack.pop()
     }
 
     print(stack.joinToString(""))
 }
 
-private fun Char.convertInt(): Int {
-    return this.toString().toInt()
-}
